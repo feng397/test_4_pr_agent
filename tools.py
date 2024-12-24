@@ -30,15 +30,6 @@ class DiffFormatter:
                     "chunks": [],
                 }
 
-            # File metadata (index, mode changes etc)
-            elif (
-                line.startswith("index ")
-                or line.startswith("new file")
-                or line.startswith("deleted file")
-            ):
-                if current_file:
-                    current_file["metadata"] = line
-
             # Chunk header
             elif line.startswith("@@"):
                 if current_file:
@@ -125,19 +116,19 @@ class DiffFormatter:
                         if change["type"] != "deletion"
                     ]
                 )
-                for change in chunk["changes"]:
-                    if change["type"] == "addition":
-                        line_info = f"+ {change['new_line_number']}"
-                        line_info = line_info.rjust(max_line_number_length + 2)
-                    elif change["type"] == "deletion":
-                        line_info = " "
-                        line_info = "-" + line_info.rjust(max_line_number_length + 1)
-                    else:
-                        line_info = f" {change['new_line_number']}"
-                        line_info = line_info.rjust(max_line_number_length + 2)
-                    # spaces = ' ' * (15 - len(line_info))
-                    spaces = ""
-                    formatted_output.append(f"{line_info}{spaces}: {change['content']}")
+            for change in chunk["changes"]:
+                if change["type"] == "addition":
+                    line_info = f"+ {change['new_line_number']}"
+                    line_info = line_info.rjust(max_line_number_length + 2)
+                elif change["type"] == "deletion":
+                    line_info = " "
+                    line_info = "-" + line_info.rjust(max_line_number_length + 1)
+                else:
+                    line_info = f" {change['new_line_number']}"
+                    line_info = line_info.rjust(max_line_number_length + 2)
+                # spaces = ' ' * (15 - len(line_info))
+                spaces = ""
+                formatted_output.append(f"{line_info}{spaces}: {change['content']}")
 
         return "\n".join(formatted_output)
 

@@ -15,12 +15,17 @@ logging.getLogger().setLevel(logging.DEBUG)
 # 2. Log
 # 3. RAG with langchain
 
+def present_info():
+    """present some info about this project."""
+    print("这是一个测试仓库，仅用于测试...")
+
 def main() -> None:
     """Run the agent."""
+    present_info()
     owner, repo_name, pull_number = from_github()
-    print("\n*****************************\n",owner, repo_name, pull_number,"\n*****************************\n")
+    print("\n", "*" * 100,"\n", owner, repo_name, pull_number,"\n", "*" * 100, "\n")
 
-    repo_path = f"/Users/lingyawen1/lyw/AGI/2_Agents/composio_test/{repo_name}"
+    repo_path = f"./composio_test/{repo_name}"
 
     graph, composio_toolset = get_graph(repo_path)
 
@@ -30,7 +35,7 @@ def main() -> None:
     )
     composio_toolset.execute_action(
         action=Action.FILETOOL_CHANGE_WORKING_DIRECTORY,
-        params={"path": "/Users/lingyawen1/lyw/AGI/2_Agents/composio_test/"}, # repo_path},
+        params={"path": "./composio_test/"}, # repo_path},
     )
     composio_toolset.execute_action(
         action=Action.CODE_ANALYSIS_TOOL_CREATE_CODE_MAP,
@@ -67,8 +72,9 @@ def main() -> None:
         },
         {"recursion_limit": 50},
     )
-
+    print("*" * 50, "result ", "*" * 50)
     print(run_result)
+    print("*" * 50, "finished ", "*" * 50)
 
 
 if __name__ == "__main__":

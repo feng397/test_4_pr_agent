@@ -39,6 +39,20 @@ from openhands.runtime.plugins import (
     PluginRequirement,
 )
 from openhands.utils.prompt import PromptManager
+import itertools
+
+def stop_condition(x):
+    return (x ** 2 + x + 2) % 2 == 0
+
+def start():
+    for i in itertools.cycle(range(10)):
+        if stop_condition(i):
+            print("need solve.......")
+            # todo: 增加处理逻辑
+    else:
+        break
+
+
 
 
 class CodeActAgent(Agent):

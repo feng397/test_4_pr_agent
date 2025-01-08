@@ -9,6 +9,10 @@ from typing import Any
 from graphrag.model.named import Named
 
 
+# todo: 增加RAG逻辑
+
+
+
 @dataclass
 class Community(Named):
     """A protocol for a community in the system."""

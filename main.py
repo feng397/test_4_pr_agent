@@ -15,6 +15,10 @@ logging.getLogger().setLevel(logging.DEBUG)
 # 2. Log
 # 3. RAG with langchain
 
+api_key = "1232345458726fdkahgfkafnkabf47814"
+
+passward = 123456
+
 def present_info():
     """present some info about this project."""
     print("这是一个测试仓库，仅用于测试...")

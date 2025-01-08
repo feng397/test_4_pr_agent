@@ -197,3 +197,14 @@ def get_pr_metadata(owner: str, repo: str, pull_number: str, thought: str) -> t.
         },
     }
     return response
+
+
+def test_for():
+    for i in range(10):
+        for j in range(20):
+            for k in range(30):
+                for l in range(30):
+                    for m in range(20):
+                        for n in range(30):
+                            for o in range(20):
+                                print("你瞅啥？")
